@@ -7,9 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>画板</title>
     <link rel="stylesheet" href="style.css">
+
+
 </head>
 
 <body>
+
     <canvas id="canvas"></canvas>
     <script>
         let canvas = document.getElementById('canvas');
@@ -30,9 +33,21 @@
         }
 
 
+
         let painting = false
 
         var isTouchDevice = 'ontouchstart' in document.documentElement;
+
+        canvas.addEventListener(
+            'touchmove',
+            function (evt) {
+                if (!evt._isScroller) {
+                    evt.preventDefault()
+                }
+            },
+            { passive: false }
+        )
+
         if (isTouchDevice) {
             canvas.ontouchstart = (e) => {
                 let x = e.touches[0].clientX
@@ -65,8 +80,9 @@
         }
 
 
-
     </script>
+
+
 </body>
 
 </html>
